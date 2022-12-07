@@ -7,7 +7,7 @@ print(d)
 
 companies = [
     'AAPL', 'MSFT', 'AMZN', 'GOOGL', 'SSNLF', 'TM', 'DDAIF', 'TSLA', 'BAMXF',
-    'CSCO', 'META', 'IBM', 'SAP', 'INTC', 'STLA', 'RIVIN', 'LI', 'MULN', 'VLCN',
+    'CSCO', 'META', 'IBM', 'SAP', 'INTC', 'STLA', 'RIVN', 'LI', 'MULN', 'VLCN',
     'PCAR'
 ]
 
@@ -44,27 +44,31 @@ async def on_message(message):
         if(len(words) == 2):
             if(words[1] in companies):
                 data = c.quote(symbol=words[1])
-                await message.channel.send('Company Name: ' + data['companyName'] + '\nPrevious Day Closing Price: ' + data['previousClose'] + ' USD\n' + 'Latest Price: ' + data['latestPrice'] + ' USD\n' + '52 Week High: ' + data['week52High'] + ' USD\n' + '52 Week Low' + data['week52Low'] + ' USD\n')
+                await message.channel.send('Company Name: ' + data['companyName'] + '\nPrevious Day Closing Price: ' + str(data['previousClose']) + ' USD\n' + 'Latest Price: ' + str(data['latestPrice']) + ' USD\n' + '52 Week High: ' + str(data['week52High']) + ' USD\n' + '52 Week Low' + str(data['week52Low']) + ' USD\n')
             else:
                 await message.channel.send('Use the info command to refer to the list of available companies')
 
     if message.content == '$positive':
-        postive = ''
-        for i in companies:
-            data = c.quote(symbol=i)
+        positive = ''
+        for i in range(len(companies)):
+            print(i)
+            print(companies[i])
+            data = c.quote(symbol=companies[i])
+            print(data)
             if(data['changePercent'] > 0):
-                postive += (data['companyName'] + ': ' +
-                            data['changePercent'] + '/n')
+                positive += (data['companyName'] + ' : ' +
+                             str(data['changePercent']) + '\n')
+                print('found')
 
-        await message.channel.send(postive)
+        await message.channel.send(positive)
 
     if message.content == '$negative':
         negative = ''
         for i in companies:
             data = c.quote(symbol=i)
             if(data['changePercent'] < 0):
-                negative += (data['companyName'] + ': ' +
-                             data['changePercent'] + '/n')
+                negative += (data['companyName'] + ' : ' +
+                             str(data['changePercent']) + '\n')
 
         await message.channel.send(negative)
 
