@@ -36,7 +36,7 @@ async def on_message(message):
 
     if message.content == '$help':
         await message.channel.send(
-            '$info : To list the companies and respective NASDAQ symbols available for tracking\n\n${symbol} : To list trading details of the company co\n\n$positive : To list the companies with a positive change percentage\n\n$negative : To list the companies with a negative change percentage'
+            '$info : To list the companies and respective NASDAQ symbols available for tracking\n\ntrack {symbol} : To list stock details of the corresponding company\n\n$positive : To list the companies with a positive change percentage\n\n$negative : To list the companies with a negative change percentage\n\n$volume high : To list the company with the largest average volume of stocks traded\n\n$volume low : To list the company with the lowest average volume of stocks traded'
         )
 
     if 'track' in text:
@@ -50,7 +50,7 @@ async def on_message(message):
                                            'Latest Price: ' +
                                            str(data['latestPrice']) + ' USD\n' +
                                            '52 Week High: ' + str(data['week52High']) +
-                                           ' USD\n' + '52 Week Low' +
+                                           ' USD\n' + '52 Week Low' + ': ' +
                                            str(data['week52Low']) + ' USD\n')
             else:
                 await message.channel.send(
