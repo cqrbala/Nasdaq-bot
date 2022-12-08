@@ -1,6 +1,6 @@
 # About the BOT
 
-The Nasdaq Bot tracks 10 of the top companies in the Tech and Auto industry each, which are listed on the Nasdaq Stock Exchange. The data is of realtime with a maximum of a 15minute delay in the worst case possible.
+The Nasdaq Bot tracks the top companies in the Tech and Auto industry(10 companies each), which are listed on the Nasdaq Stock Exchange. The data is realtime with a maximum of a 15minute delay in the worst case possible.
 Use the $help command to navigate through the commands required to invoke the functionalities of the bot.
 
 ```c
