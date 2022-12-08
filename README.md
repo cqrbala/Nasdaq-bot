@@ -18,6 +18,8 @@ $volume low : To list the company with the lowest average volume of stocks trade
 ```
 
 The following video shows the bot at work and the results of the above commands:
+https://user-images.githubusercontent.com/102587700/206394162-b7e0d41f-d883-4612-934b-901e6c157658.mov
+
 
 # Libraries used
 
@@ -52,6 +54,7 @@ This facilitates the connection to discord as a client and allows us to write co
 Below is a simple function to demonstrate the concept of events where: a message is sent on the channel, bot checks if it was sent by the user and not itself, bot replies with “Hello” if the message was “Hello”.
 
 ```c
+
 intents = discord.Intents().all()
 client = discord.Client(intents=intents)
 
@@ -76,5 +79,5 @@ A data structure called ‘companies’ contains the symbols for all the compani
 
 # Future plans
 
-1. At the moment the bot is active as long as the python script runs. But as soon as the program stops, the bot goes offline. To resolve this, I’m planning on hosting the bot on a server so the script can run at all times and everyone can use the bot.
+1. At the moment, the bot is active as long as the python script runs. But as soon as the program stops, the bot goes offline. To resolve this, I’m planning on hosting the bot on a server so the script can run at all times and everyone can use the bot.
 2. I will add more functionalities to the bot as more ideas strike me.
