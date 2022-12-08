@@ -2,7 +2,7 @@ import discord
 import pyEX as p
 
 c = p.Client(api_token='priv', version='stable')
-d = c.quote(symbol='TWTR')
+d = c.quote(symbol='SSNLF')
 print(d)
 
 companies = [
@@ -41,12 +41,20 @@ async def on_message(message):
 
     if 'track' in text:
         words = text.split(' ')
-        if(len(words) == 2):
-            if(words[1] in companies):
+        if (len(words) == 2):
+            if (words[1] in companies):
                 data = c.quote(symbol=words[1])
-                await message.channel.send('Company Name: ' + data['companyName'] + '\nPrevious Day Closing Price: ' + str(data['previousClose']) + ' USD\n' + 'Latest Price: ' + str(data['latestPrice']) + ' USD\n' + '52 Week High: ' + str(data['week52High']) + ' USD\n' + '52 Week Low' + str(data['week52Low']) + ' USD\n')
+                await message.channel.send('Company Name: ' + data['companyName'] +
+                                           '\nPrevious Day Closing Price: ' +
+                                           str(data['previousClose']) + ' USD\n' +
+                                           'Latest Price: ' +
+                                           str(data['latestPrice']) + ' USD\n' +
+                                           '52 Week High: ' + str(data['week52High']) +
+                                           ' USD\n' + '52 Week Low' +
+                                           str(data['week52Low']) + ' USD\n')
             else:
-                await message.channel.send('Use the info command to refer to the list of available companies')
+                await message.channel.send(
+                    'Use the info command to refer to the list of available companies')
 
     if message.content == '$positive':
         positive = ''
@@ -55,9 +63,9 @@ async def on_message(message):
             print(companies[i])
             data = c.quote(symbol=companies[i])
             print(data)
-            if(data['changePercent'] > 0):
-                positive += (data['companyName'] + ' : ' +
-                             str(data['changePercent']) + '\n')
+            if (data['changePercent'] > 0):
+                positive += (data['companyName'] + ' : ' + str(data['changePercent']) +
+                             '\n')
                 print('found')
 
         await message.channel.send(positive)
@@ -66,11 +74,34 @@ async def on_message(message):
         negative = ''
         for i in companies:
             data = c.quote(symbol=i)
-            if(data['changePercent'] < 0):
-                negative += (data['companyName'] + ' : ' +
-                             str(data['changePercent']) + '\n')
+            if (data['changePercent'] < 0):
+                negative += (data['companyName'] + ' : ' + str(data['changePercent']) +
+                             '\n')
 
         await message.channel.send(negative)
+
+    if message.content == '$volume high':
+        highest = 0
+        company = ''
+        for i in companies:
+            data = c.quote(symbol=i)
+            if (data['avgTotalVolume'] > highest):
+                highest = data['avgTotalVolume']
+                company = i
+
+        await message.channel.send(company + ' : ' + str(highest))
+
+    if message.content == '$volume low':
+        lowest = 9999999999999999999999999999999999999999999999
+        company = ''
+        for i in companies:
+            data = c.quote(symbol=i)
+            if (data['avgTotalVolume'] < lowest):
+                lowest = data['avgTotalVolume']
+                company = i
+
+        await message.channel.send(company + ' : ' + str(lowest))
+
 
 client.run(
     'priv')
