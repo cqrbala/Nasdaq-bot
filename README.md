@@ -18,7 +18,10 @@ $volume low : To list the company with the lowest average volume of stocks trade
 ```
 
 The following video shows the bot at work and the results of the above commands:
-https://user-images.githubusercontent.com/102587700/206394162-b7e0d41f-d883-4612-934b-901e6c157658.mov
+
+https://user-images.githubusercontent.com/102587700/206395465-ab38b79f-9780-4573-a9b5-61bcb174a353.mp4
+
+
 
 
 # Libraries used
